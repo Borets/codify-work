@@ -1,0 +1,58 @@
+.wrapper {
+	font-size: 100px;
+	width: 1005px;
+    margin: 0 auto;
+    font-family: sans-serif;
+
+}
+.clock {
+	position: absolute;
+	display: inline-block;
+	top: 50%;
+	left: 50%;
+	margin-top: -50px; 
+	margin-bottom: -50px;
+	font-size: 110px;
+	margin-left: -150px;
+    margin-top: -100px;
+}
+
+.main-country {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -272px;
+    margin-top: -82px;
+	font-size: 60px;
+	font-weight: bold;
+	color: #70757c;
+}
+.main-time {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -225px;
+    margin-top: -30px;
+	font-size: 30px;
+	font-weight: bold;
+	color: #c4c8ce; 
+
+}
+
+.table-responsive {
+	position: absolute;
+	font-size: 40px;
+	top: 50%;
+	left: 50%;
+
+}
+.lower-table {
+	margin-top: 10px;
+	margin-left: -200px;
+	width: 400px;
+	color:  #c4c8ce;
+}
+
+.lower-table td {
+}
+}
