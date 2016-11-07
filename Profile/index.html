@@ -1,0 +1,36 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div id="error_message" >
+		<p>Please fill out all of the required fields</p>
+		<ul id="error_list"><ul>
+	</div>
+<form>
+<input type="text" name="name" id="first_name" placeholder="First Name"> 
+<input type="text" name="name" id="last_name" placeholder="Last Name"><br>
+
+Gender: <input type="radio" name="gender" value="male"> Male
+<input type="radio" name="gender" value="female"> Female <br>
+
+<input type="text" name="email" id="email_address" placeholder="Email"> 
+<input type="text" name="phone" id="phone_number" placeholder="Phone Number"> <br>
+
+<textarea id="bio" maxlength="140" placeholder="Short Bio (140) Characters" rows="5" cols="41"></textarea> <br>
+Secret Question: 
+<select name="SecretQuestion">
+	<option disabled selected value value="none">-- Select a question --</option>
+	<option value="Pet Question">What is your pet's name?</option>
+	<option value="First Car">What was your first car?</option>
+	<option value="High School">Which High School did you go to?</option>
+</select> <br>
+<input type="text" id="SecretAnswer"> <br>
+
+<button type="button" id="SubmitButton">Continue</button>
+
+</form>
+<script type="text/javascript" src="js/main.js"></script>
+
+</body>
+</html
