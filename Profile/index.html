@@ -3,34 +3,66 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+
+<div id = "left-message">
+	<header>
+		<h4>Need a Profile?</h4>
+		<h2>Create one now!</h2>
+	</header>
+</div>
+<div id = "form_wrapper">
+
+
+	<form>
+		<input type="text" name="name" id="first_name" placeholder="First Name"> 
+		<input type="text" name="name" id="last_name" placeholder="Last Name"><br>
+		<div class="secondary-fields">
+			<b>Gender:</b> <input type="radio" name="gender" value="male" class="big-radio-button"> Male
+			<input type="radio" name="gender" value="female" class="big-radio-button"> Female <br>
+		</div>
+
+
+
+		<input type="text" name="email" id="email_address" placeholder="Email"> 
+		<input type="text" name="phone" id="phone_number" placeholder="Phone Number"> <br>
+		
+		<div class="secondary-fields">
+		<b>	Short Bio:</b><br>
+			<textarea id="bio" maxlength="140" placeholder="Short Bio (140) Characters" rows="5" cols="41" class="secondary-fields"></textarea> <br>
+
+		</div>
+		<div class="secondary-fields">
+		<B>Secret Question: </B>
+		<select name="SecretQuestion">
+			<option disabled selected value value="none">-- Select a question --</option>
+			<option value="Pet Question">What is your pet's name?</option>
+			<option value="First Car">What was your first car?</option>
+			<option value="High School">Which High School did you go to?</option>
+		</select> <br>
+
+		<input type="text" id="SecretAnswer" placeholder="Answer"> <br>
+		</div>
+		<button type="button" id="SubmitButton">Submit</button>
+
+	</form>
 	<div id="error_message" >
 		<p>Please fill out all of the required fields</p>
 		<ul id="error_list"><ul>
 	</div>
-<form>
-<input type="text" name="name" id="first_name" placeholder="First Name"> 
-<input type="text" name="name" id="last_name" placeholder="Last Name"><br>
+</div>
 
-Gender: <input type="radio" name="gender" value="male"> Male
-<input type="radio" name="gender" value="female"> Female <br>
+<div id="profile">
+	<h2>User Profile</h2>
+	<h3 id="profile_welcome">Welcome </h3>
+	<h3 id="profile_gender">Gender: </h3>
+	<h3 id="profile_email">Email: </h3>
+	<h3 id="profile_phone">Phone: </h3>
+	<h3 id="profile_bio">Short Bio: </h3>
+	<h3 id="profile_question">Secret Question </h3>
+	<h3 id="profile_answer">Answer --> </h3>
 
-<input type="text" name="email" id="email_address" placeholder="Email"> 
-<input type="text" name="phone" id="phone_number" placeholder="Phone Number"> <br>
-
-<textarea id="bio" maxlength="140" placeholder="Short Bio (140) Characters" rows="5" cols="41"></textarea> <br>
-Secret Question: 
-<select name="SecretQuestion">
-	<option disabled selected value value="none">-- Select a question --</option>
-	<option value="Pet Question">What is your pet's name?</option>
-	<option value="First Car">What was your first car?</option>
-	<option value="High School">Which High School did you go to?</option>
-</select> <br>
-<input type="text" id="SecretAnswer"> <br>
-
-<button type="button" id="SubmitButton">Continue</button>
-
-</form>
+</div>
 <script type="text/javascript" src="js/main.js"></script>
 
 </body>
-</html
+</html>
