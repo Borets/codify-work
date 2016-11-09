@@ -14,6 +14,8 @@ form {
 /*	background: red;*/
 /*	width: 500px;
 */	height: 30px;
+	background-color: #ef9494;
+	color: #b72c2c;
 }
 
 #profile {
@@ -49,7 +51,7 @@ form {
 }
 
 #left-message header {
-	margin-top: 80px;
+	margin-top: 150px;
 
 
 }
@@ -62,11 +64,11 @@ form {
 
 #form_wrapper input {
 	border: none ;
-	height: 10px;
-	font-size: 16px;
+/*	height: 10px;*/
+	font-size: 20px;
 	margin-top: 1em;
 	margin-right: 0.5em;
-	padding: 0.6em 0.1em 1.0em 0;
+	padding: 0.1em 0.1em 0.1em 0em;
 	background: transparent;
     font-family: 'lato', sans-serif;
     color: #595F6E;
@@ -78,8 +80,10 @@ form {
 
 }
 .secondary-fields select {
-	font-size: 12px;
+	font-size: 16px;
+	margin-left: 25px;
 }
+
 #SecretAnswer {
 	width: 98%;
 }
