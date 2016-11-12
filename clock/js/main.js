@@ -7,7 +7,7 @@ var tokyo_time = document.getElementById("time-Tokyo");
 
 function UpdateClock () {
 
-	usa_time.innerHTML = GetTime(5);
+	usa_time.innerHTML = GetTime(4);
 	moscow_time.innerHTML = GetTime(3);
 	berlin_time.innerHTML = GetTime(1);
 	tokyo_time.innerHTML = GetTime(9);
