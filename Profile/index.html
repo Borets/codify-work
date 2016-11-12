@@ -14,33 +14,34 @@
 
 
 	<form>
+
 		<input type="text" name="name" id="first_name" placeholder="First Name"> 
 		<input type="text" name="name" id="last_name" placeholder="Last Name"><br>
+		
 		<div class="secondary-fields">
-			<b>Gender:</b> <input type="radio" name="gender" value="male" class="big-radio-button"> Male
-			<input type="radio" name="gender" value="female" class="big-radio-button"> Female <br>
+			<b>Gender:</b> <input type="radio" name="gender" value="Male" class="big-radio-button">Male
+			<input type="radio" name="gender" value="Female" class="big-radio-button">Female<br>
 		</div>
-
-
 
 		<input type="text" name="email" id="email_address" placeholder="Email"> 
 		<input type="text" name="phone" id="phone_number" placeholder="Phone Number"> <br>
 		
 		<div class="secondary-fields">
-		<b>	Short Bio:</b><br>
+			<b>	Short Bio:</b><br>
 			<textarea id="bio" maxlength="140" placeholder="Short Bio (140) Characters" rows="5" cols="52" class="secondary-fields"></textarea> <br>
 
 		</div>
-		<div class="secondary-fields">
-		<B>Secret Question: </B>
-		<select name="SecretQuestion">
-			<option disabled selected value value="none">-- Select a question --</option>
-			<option value="Pet Question">What is your pet's name?</option>
-			<option value="First Car">What was your first car?</option>
-			<option value="High School">Which High School did you go to?</option>
-		</select> <br>
 
-		<input type="text" id="SecretAnswer" placeholder="Answer"> <br>
+		<div class="secondary-fields">
+			<B>Secret Question: </B>
+			<select name="SecretQuestion">
+				<option disabled selected value value="none">-- Select a question --</option>
+				<option value="Pet Question">What is your pet's name?</option>
+				<option value="First Car">What was your first car?</option>
+				<option value="High School">Which High School did you go to?</option>
+			</select> <br>
+
+			<input type="text" id="SecretAnswer" placeholder="Answer"> <br>
 		</div>
 		<button type="button" id="SubmitButton">Submit</button>
 
@@ -51,15 +52,20 @@
 	</div>
 </div>
 
-<div id="profile">
-	<h2>User Profile</h2>
-	<h3 id="profile_welcome">Welcome </h3>
-	<h3 id="profile_gender">Gender: </h3>
-	<h3 id="profile_email">Email: </h3>
-	<h3 id="profile_phone">Phone: </h3>
-	<h3 id="profile_bio">Short Bio: </h3>
-	<h3 id="profile_question">Secret Question </h3>
-	<h3 id="profile_answer">Answer --> </h3>
+<div id="profile_modal" class="modal">
+	<div class="modal-box">
+		<span class="close">x</span>
+		<div class="modal-content">
+			<h2>User Profile</h2>
+			<span class="ProfileHeaders">Name </span><span id="profile_welcome"></span><br> 
+			<span class="ProfileHeaders">Gender: </span><span id="profile_gender"></span><br>
+			<span class="ProfileHeaders">Email: </span><span id="profile_email"></span><br>
+			<span class="ProfileHeaders">Phone: </span><span id="profile_phone"></span><br>
+			<span class="ProfileHeaders">Short Bio: </span><span id="profile_bio"></span><br>
+			<span class="ProfileHeaders">Secret Question </span><br><span id="profile_question"></span><br>
+			<span class="ProfileHeaders">Secret Answer </span><span ID="profile_answer"></span><br>
+		</div>
+	</div>
 
 </div>
 <script type="text/javascript" src="js/main.js"></script>

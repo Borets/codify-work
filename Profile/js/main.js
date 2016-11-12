@@ -1,6 +1,10 @@
 document.getElementById('SubmitButton').addEventListener("click", FormSubmit)
 
+
 var error_list = document.getElementById("error_message")
+var close = document.getElementsByClassName("close")[0];
+var modal = document.getElementById('profile_modal');
+
 var gender_value = ""
 var first_name = ""
 var last_name = ""
@@ -8,6 +12,9 @@ var email = ""
 var phone = ""
 var bio = ""
 var secret = ""
+
+
+
 //Function responsible for submitting my form
 function FormSubmit () {
 	ClearErrorList()
@@ -22,7 +29,7 @@ function FormSubmit () {
 function CheckFirstName (){
 	first_name = document.getElementById("first_name").value
 	if (first_name == "") {
-		ErrorMessage("First name can't be blank")
+		ErrorMessage("First name can't be left blank")
 		return false 
 	} else {
 		return true
@@ -32,7 +39,7 @@ function CheckFirstName (){
 function CheckLastName (){
 	last_name = document.getElementById("last_name").value
 	if (last_name == "") {
-		ErrorMessage("Last name can't be blank")
+		ErrorMessage("Last name can't be left blank")
 		return false 
 	} else {
 		return true
@@ -116,6 +123,7 @@ function ClearErrorList(){
 	error_list.innerHTML="";
 }
 
+
 //Work in progress below, trying to append text from the form to profile
 
 function DisplayProfile(){
@@ -128,17 +136,29 @@ function DisplayProfile(){
 	var QuestionMsg = document.getElementById("profile_question")
 	var AnswerMsg = document.getElementById("profile_answer")
 
-	WelcomeMsg.innerHTML = WelcomeMsg.innerHTML + first_name + " " + last_name
-
+	
+	WelcomeMsg.innerHTML = first_name + " " + last_name
 //Need to figure out how to obtain gender value from the group of radio boxes
-	GenderMsg.innerHTML = GenderMsg.innerHTML + gender_value
-	EmailMsg.innerHTML = EmailMsg.innerHTML + email
-	PhoneMsg.innerHTML = PhoneMsg.innerHTML + phone
-	BioMsg.innerHTML = BioMsg.innerHTML + bio
-	AnswerMsg.innerHTML = AnswerMsg.innerHTML + secret
+	GenderMsg.innerHTML = gender_value
+	EmailMsg.innerHTML =  email
+	PhoneMsg.innerHTML = phone
+	BioMsg.innerHTML =  bio
+	AnswerMsg.innerHTML = secret
 
-	document.getElementById("form_wrapper").style.display = "none"
-	document.getElementById("profile").style.display = "visible"
+	document.getElementById("profile_modal").style.display = "block"
 
 
 }
+
+//Closing the modal
+close.onclick = function() {
+    modal.style.display = "none";
+}
+//Clicking outside of the modal closes it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
