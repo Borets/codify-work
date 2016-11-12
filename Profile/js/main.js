@@ -11,6 +11,7 @@ var last_name = ""
 var email = ""
 var phone = ""
 var bio = ""
+var question = ""
 var secret = ""
 
 
@@ -19,7 +20,7 @@ var secret = ""
 function FormSubmit () {
 	ClearErrorList()
 //Check if any of the fields are missing infomration 
-	if (CheckFirstName() && CheckLastName() && CheckGender() && CheckEmail() && CheckPhone() && CheckBio() && CheckSecret()) {
+	if (CheckFirstName() && CheckLastName() && CheckGender() && CheckEmail() && CheckPhone() && CheckQuestion() && CheckBio() && CheckSecret()) {
 		console.log ("Success")
 		DisplayProfile()
 	} else { console.log ("Errors")
@@ -100,6 +101,18 @@ function CheckBio (){
 	}
 }
 
+function CheckQuestion (){
+	
+	var question_object = document.getElementById("SecretQuestion")
+	question = question_object.options[question_object.selectedIndex].text
+	console.log(question)
+	if (question == "-- Select a question --") {
+		ErrorMessage("Select a secret Question")
+		return false 
+	} else {
+		return true
+	}
+}
 
 function CheckSecret (){
 	secret = document.getElementById("SecretAnswer").value
@@ -143,6 +156,7 @@ function DisplayProfile(){
 	EmailMsg.innerHTML =  email
 	PhoneMsg.innerHTML = phone
 	BioMsg.innerHTML =  bio
+	QuestionMsg.innerHTML = question
 	AnswerMsg.innerHTML = secret
 
 	document.getElementById("profile_modal").style.display = "block"
