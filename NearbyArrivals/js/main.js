@@ -9,7 +9,6 @@ function initialize(){
 		disableDefaultUI: true,
 		mapTypeId: 'terrain'
 	}	
-	GetStops(); 
 	var map = new google.maps.Map(document.getElementById("MainMap"), mapProp)
 	var marker = new google.maps.Marker({position:mapProp.center})
 	
