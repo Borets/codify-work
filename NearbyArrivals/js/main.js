@@ -31,7 +31,7 @@ function GetStops() {
 	// });
 
 	$.ajax({
-	url: 'http://api.511.org/transit/stopPlaces?api_key=5a600371-9f1f-4817-a187-7e056376e8b3&operator_id=SFMTA',
+	url: 'https://api.511.org/transit/stopPlaces?api_key=5a600371-9f1f-4817-a187-7e056376e8b3&operator_id=SFMTA',
 	dataType: "jsonp",
 	type: 'GET',
 
