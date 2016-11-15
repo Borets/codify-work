@@ -1,0 +1,12 @@
+body {
+
+}
+
+#MainMap { 
+	width: 70%;
+	height: 500px;
+	float: left;
+}
+#StopList {
+/*	float: right ;*/
+}
