@@ -218,7 +218,7 @@ function DisplayNearestStops(proximity) {
 function GetBusesForEachStop(StopID,ID) {
 
 	$.ajax({
-	url: 'http://api.511.org/transit/StopMonitoring?api_key=5a600371-9f1f-4817-a187-7e056376e8b3&agency=sf-muni&stopCode='+StopID,
+	url: 'https://api.511.org/transit/StopMonitoring?api_key=5a600371-9f1f-4817-a187-7e056376e8b3&agency=sf-muni&stopCode='+StopID,
 	type: 'GET',
 	async: false,
 	dataType: "jsonp",
