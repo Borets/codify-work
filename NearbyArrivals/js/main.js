@@ -85,7 +85,7 @@ function GetBusStops(map,userlat,userlng) {
 
 
 	$.ajax({
-	url: 'http://localhost:8000/data/stops.json',
+	url: 'https://borets.github.io/codify-work/NearbyArrivals/data/stops.json',
 	type: 'GET',
 	crossOrigin: true,
 	dataType: "json",
