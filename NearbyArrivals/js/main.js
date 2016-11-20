@@ -1,7 +1,7 @@
 google.maps.event.addDomListener(window, 'load', initialize)
 var api_key = "5a600371-9f1f-4817-a187-7e056376e8b3"
 var api_key2 = "15493565-011a-420c-a45a-c5222df2efed"
-var proximity = 0.05
+var proximity = 0.09
 
 var StopArray = []
 var userlat
@@ -10,16 +10,8 @@ var map
 var StopArrayNear = []
 var NearestBusesDeparture = []
 var ExpectedNearbyArrivals = []
-// var ExpectedNearbyArrivals = [{
-// 	lines: {
-// 		"00" : {
-// 			"inbound": [1,2,3,4,5],
-// 			"outbound": [6,7,8,9,10]
-// 		},
 
-// 	}
 
-// }]
 
 
 function initialize(){
@@ -49,7 +41,7 @@ function initialize(){
 //Obtains User Location and calls to get stops 
 function GetUserLocation(map) {
 
-	var infoWindow = new google.maps.InfoWindow({map: map});
+	// var infoWindow = new google.maps.InfoWindow({map: map});
 
 	if (navigator.geolocation) {
 	      navigator.geolocation.getCurrentPosition(function(position) {
@@ -62,8 +54,8 @@ function GetUserLocation(map) {
 	          lng: userlng
 	        };
 
-	        infoWindow.setPosition(pos);
-	        infoWindow.setContent('Location found.');
+//	        infoWindow.setPosition(pos);
+//	        infoWindow.setContent('Location found.');
 	        
 	        map.setCenter(pos);
 	        map.setZoom(16);
@@ -88,6 +80,7 @@ function GetBusStops(map,userlat,userlng) {
 	url: 'https://borets.github.io/codify-work/NearbyArrivals/data/stops.json',
 	type: 'GET',
 	crossOrigin: true,
+	async: false,
 	dataType: "json",
 
 	success: function(data){
@@ -205,20 +198,24 @@ function DisplayNearestStops(proximity) {
 			//In the future you would pass more variables
 			AddMarker(position)
 
-
 			//Pulls Expected Arrival Times for each of the stops nearby
 			GetBusesForEachStop(StopID, i)
 
-		}
+		}     
+
+
 	}
 
-	
+
+
+
+
 }
-//Function gets arrival times for each of the specified stops
+//Function gets the arrival times for each of the stops
 function GetBusesForEachStop(StopID,ID) {
 
 	$.ajax({
-	url: 'https://api.511.org/transit/StopMonitoring?api_key=5a600371-9f1f-4817-a187-7e056376e8b3&agency=sf-muni&stopCode='+StopID,
+	url: 'https://api.511.org/transit/StopMonitoring?api_key='+api_key+'&agency=sf-muni&stopCode='+StopID,
 	type: 'GET',
 	async: false,
 	dataType: "jsonp",
@@ -238,14 +235,17 @@ function GetBusesForEachStop(StopID,ID) {
 
 			TempBusArray.push({BusNumber: BusNumber, DepartureTime: DepartureTime, Direction: Direction})
 			TempBusArray2.push({BusNumber: BusNumber, DepartureTime: DepartureTime, Direction: Direction})
-			SaveToBusListArray(TempBusArray2,ID)
-
+			SaveToBusListArray(TempBusArray2,StopID)
 		}
-		
-		StopArray[ID].ExpectedBusses = TempBusArray
-		DisplayTimes()
 
+		StopArray[ID].ExpectedBusses = TempBusArray
 		console.log(StopArray[ID])
+
+
+		//UGLY HACK to display buses on the last run
+		if (StopArray[ID+1].distance >= proximity){
+			DisplayTimes()	
+		}
 
 		},
 		
@@ -260,32 +260,44 @@ function GetBusesForEachStop(StopID,ID) {
 }
 //Organizes Bus Arrivals based on the bus number
 
-function SaveToBusListArray (TempBusArray,ID) { 
+function SaveToBusListArray (TempBusArray,StopID) { 
 	var BNumber = TempBusArray[0].BusNumber
 	var DepartureTime = TempBusArray[0].DepartureTime
 	var Direction = TempBusArray[0].Direction
-	var idLocator = ContainsBus(ExpectedNearbyArrivals, BNumber, Direction)
+	var idLocator = ContainsBus(ExpectedNearbyArrivals, BNumber, Direction, StopID)
 
 	if ( idLocator > -1) {
 
 		ExpectedNearbyArrivals[idLocator].Departures.push(DepartureTime)
 
-	} else {
-		ExpectedNearbyArrivals.push({BusNumber: BNumber, Direction: Direction, Departures: [DepartureTime] })
 	}
+
+	if (idLocator == -2 ){
+
+	//	ExpectedNearbyArrivals.push({BusNumber: BNumber, Direction: Direction, Departures: [DepartureTime], StopID: StopID})
+
+	}
+
+	if (idLocator == -1 ){
+
+		ExpectedNearbyArrivals.push({BusNumber: BNumber, Direction: Direction, Departures: [DepartureTime], StopID: StopID})
+	}
+
+
+	
 }
 
 
 //Checks if the bus is included in the array
-function ContainsBus(array, bus, direction) {
+function ContainsBus(array, bus, direction, StopID) {
+
 	for (var i = 0; i < array.length; i++) {
-		if (array.length == 0) {
-			return -1
-		} else {
-			if (array[i].BusNumber == bus && array[i].Direction == direction) {
+
+			if (array[i].BusNumber == bus && array[i].Direction == direction && array[i].StopID == StopID) {
         		return i
-   			} 
-		}
+   			} else {
+   				 if ( array[i].BusNumber == bus && array[i].StopID != StopID ) { return -2}
+			}
 
 	} return -1
 
@@ -294,9 +306,9 @@ function ContainsBus(array, bus, direction) {
 
 function DisplayTimes() {
 
-	var BusQuantity = ExpectedNearbyArrivals.length 
 	var SidePanel = document.getElementById('StopList')
-	console
+	var BusQuantity = ExpectedNearbyArrivals.length 
+
 	for (var i = 0; i < BusQuantity; i++){ 
 		
 		var div = document.createElement('div')
@@ -329,72 +341,5 @@ var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
 return diffMins
 
 }
-
-
-
-
-
-
-
-
-
-
-// THIS SHIT HERE NEEDS TO BE DEBUGGED !!!! 
-// function DisplayArrivals(prx) {
-
-// 	for (var i = 0; i < StopArray.length; i++) {
-
-// 		console.log("THE I IS = "+i )
-		
-// 		if (StopArray[i].distance < prx) {
-
-// 			console.log ("ExpectedBusses Object " + StopArray[i].ExpectedBusses)
-
-// 			for (var y = 0; y < StopArray[i].ExpectedBusses.length; y++){
-				
-// 				console.log ("ExpectedBusses length " + StopArray[i].ExpectedBusses.length)				
-// 				console.log(StopArray[i].ExpectedBusses[y])
-
-// 				var BusArrivalObject = StopArray[i].ExpectedBusses[y]
-// 				var BusNumber = BusArrivalObject.BusNumber
-
-// 				console.log (BusArrivalObject)
-// 				console.log (BusNumber)
-
-// 					if (ContainsLine(ExpectedNearbyArrivals,BusNumber) == true ) {
-
-// 						if (BusNumber.Direction == 'Inboud'){
-// 								ExpectedNearbyArrivals.line[BusNumber].Inboud.push(BusArrivalObject.DepartureTime)
-// 							}
-
-// 						if (BusNumber.Direction == 'Outbound'){
-// 								ExpectedNearbyArrivals.line[BusNumber].Outbound.push(BusArrivalObject.DepartureTime)
-// 							}
-
-// 					} else {
-
-// 						ExpectedNearbyArrivals.push({
-// 							lines: {
-// 								BusNumber : {
-// 									Direction: [BusArrivalObject.DepartureTime]
-									
-// 								}
-
-// 							}							
-
-// 						})
-
-
-// 					}
-
-// 				}
-
-// 			} 
-
-// 		}
-
-	
-// }
-
 
 
